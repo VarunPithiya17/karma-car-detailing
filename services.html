@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Services & Pricing — Karma Car Detailing, Surat</title>
+<link rel="stylesheet" href="css/style.css"></head>
+<body><main>
+<section class="phero"><p class="eyebrow">Transparent pricing</p><h1 class="display split">Services & prices</h1><p class="reveal">Pick your car size — every price updates. No hidden “extra dirty” charges.</p></section>
+<section class="wrap">
+  <div class="tools">
+    <div class="sizes" id="sizes"></div>
+    <div id="cats" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+    <div class="grow"></div>
+    <input class="field" id="f" placeholder="Filter services…" style="max-width:260px">
+  </div>
+  <div id="list"></div><p class="empty" id="empty">No service matches. <a class="gold" href="book.html">Ask us anyway →</a></p>
+</section>
+<section class="sec"><p class="eyebrow">Bundles</p><h2 class="display h2 split">Karma packages</h2>
+  <div class="pk" id="pk"></div></section>
+</main>
+<script src="js/gsap.min.js"></script><script src="js/ScrollTrigger.min.js"></script><script src="js/lenis.min.js"></script><script src="js/app.js"></script>
+<script>
+let size = 1, cat = "All";
+const cats = ["All", ...new Set(SVC.map(s => s.cat))];
+$("#sizes").innerHTML = SIZES.map((s, i) => `<button data-i="${i}">${s}</button>`).join("");
+$("#cats").innerHTML = cats.map(c => `<button class="chip" data-c="${c}">${c}</button>`).join("");
+const PK = [
+  { n: "Refresh", ids: ["foam", "interior", "headlight"], f: ["Foam wash", "Interior deep detail", "Headlight restore"] },
+  { n: "Showroom", ids: ["polish", "ceramic", "interior"], f: ["Machine polish", "9H ceramic, 3-yr", "Interior deep detail", "Free 6-month top-up"], hot: 1 },
+  { n: "Armour", ids: ["correct", "ppf", "rust"], f: ["Full paint correction", "Full-body PPF, 10-yr", "Underbody anti-rust", "Free pick-up & drop"] },
+];
+function render() {
+  $$("#sizes button").forEach(b => b.classList.toggle("on", +b.dataset.i === size));
+  $$("#cats .chip").forEach(b => b.classList.toggle("on", b.dataset.c === cat));
+  const v = $("#f").value.toLowerCase();
+  const rows = SVC.filter(s => (cat === "All" || s.cat === cat) && (s.name + s.d + s.cat).toLowerCase().includes(v));
+  $("#list").innerHTML = rows.map(s => `<div class="svc" id="${s.id}"><img src="img/${s.img}.jpg" alt="" loading="lazy"><div><span class="tag">${s.cat} · ${s.time}</span><h3>${s.name}</h3></div><p>${s.d}</p><div class="pr"><b>${inr(s.p[size])}</b><small>${SIZES[size]}</small><br><a class="btn" style="margin-top:10px;padding:10px 18px" href="book.html?s=${s.id}&z=${size}"><span>Book</span></a></div></div>`).join("");
+  $("#empty").style.display = rows.length ? "none" : "block";
+  $("#pk").innerHTML = PK.map(p => { const full = p.ids.reduce((a, id) => a + SVC.find(s => s.id === id).p[size], 0); return `<div class="pkg ${p.hot ? "hot" : ""}">${p.hot ? '<span class="eyebrow">Most booked</span>' : ""}<h3>${p.n}</h3><b>${inr(Math.round(full * .85 / 100) * 100 - 1)}</b><small style="color:var(--mute)"><s>${inr(full)}</s> · save 15% · ${SIZES[size]}</small><ul>${p.f.map(x => `<li>${x}</li>`).join("")}</ul><a class="btn" href="book.html?p=${p.n}&z=${size}"><span>Book ${p.n}</span></a></div>`; }).join("");
+  gsap.from(".svc", { opacity: 0, y: 30, stagger: .05, duration: .6, ease: "expo.out" });
+}
+$("#sizes").onclick = e => { if (e.target.dataset.i) { size = +e.target.dataset.i; render(); } };
+$("#cats").onclick = e => { if (e.target.dataset.c) { cat = e.target.dataset.c; render(); } };
+$("#f").oninput = render;
+render();
+if (location.hash) { const t = $(location.hash); if (t) setTimeout(() => { t.scrollIntoView({ block: "center" }); gsap.fromTo(t, { backgroundColor: "#e0a84c33" }, { backgroundColor: "#0000", duration: 2 }); }, 400); }
+</script>
+</body></html>

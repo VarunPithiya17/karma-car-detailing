@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gallery — Karma Car Detailing, Surat</title>
+<link rel="stylesheet" href="css/style.css"></head>
+<body><main>
+<section class="phero"><p class="eyebrow">The work</p><h1 class="display split">Gallery</h1><p class="reveal">Every car here left our bay with a warranty card. Tap any photo to zoom.</p></section>
+<section class="wrap" style="padding-bottom:120px">
+  <div class="tools" id="cats"></div>
+  <div class="gal" id="gal"></div>
+</section>
+<div class="lb"><button class="icon-btn x" aria-label="Close">✕</button><img alt=""></div>
+</main>
+<script src="js/gsap.min.js"></script><script src="js/ScrollTrigger.min.js"></script><script src="js/lenis.min.js"></script><script src="js/app.js"></script>
+<script>
+const G = [["hero","Wash"],["s-ceramic","Coating"],["s-ppf","PPF"],["muscle","Correction"],["s-wrap","Wrap"],["porsche","Coating"],["s-teflon","Coating"],["bmw","Correction"],["s-rust","Wrap"],["s-polish","Correction"],["wash","Wash"]];
+let cat = "All";
+$("#cats").innerHTML = ["All", ...new Set(G.map(g => g[1]))].map(c => `<button class="chip" data-c="${c}">${c}</button>`).join("");
+function render() {
+  $$("#cats .chip").forEach(b => b.classList.toggle("on", b.dataset.c === cat));
+  $("#gal").innerHTML = G.filter(g => cat === "All" || g[1] === cat).map(g => `<figure><img src="img/${g[0]}.jpg" alt="${g[1]} work" loading="lazy"><figcaption>${g[1]}</figcaption></figure>`).join("");
+  gsap.from("#gal figure", { opacity: 0, y: 60, scale: .96, stagger: .06, duration: .9, ease: "expo.out" });
+}
+$("#cats").onclick = e => { if (e.target.dataset.c) { cat = e.target.dataset.c; render(); } };
+const lb = $(".lb");
+$("#gal").onclick = e => { const i = e.target.closest("figure img"); if (!i) return; $("img", lb).src = i.src; lb.classList.add("open"); gsap.from(".lb img", { scale: .8, opacity: 0, duration: .5, ease: "expo.out" }); };
+lb.onclick = e => { if (e.target.tagName !== "IMG") lb.classList.remove("open"); };
+render();
+</script>
+</body></html>
