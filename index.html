@@ -1,128 +1,199 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Karma Car Detailing — Ceramic, PPF & Paint Correction in Surat</title>
-<meta name="description" content="Surat's premium car detailing studio: ceramic & graphene coating, PPF, paint correction, interior deep clean. Book on WhatsApp.">
+<meta name="description" content="Surat's obsessive car detailing studio: ceramic & graphene coating, PPF, paint correction, interior deep clean. Book on WhatsApp.">
 <link rel="preload" href="fonts/anton-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css"></head>
 <body>
-<div class="loader"><div class="count">0</div><div class="bar"></div></div>
+<div class="loader" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><div class="count">00</div></div>
 <main>
 <section class="hero">
-  <div class="hero-media"><img src="img/hero.jpg" alt="Car being foam-washed at Karma studio"></div>
-  <canvas id="sweep"></canvas>
-  <div class="badge"><svg viewBox="0 0 100 100"><defs><path id="c" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0"/></defs><text font-size="9.4" letter-spacing="2.6" fill="#f3efe7"><textPath href="#c">• CERAMIC • PPF • GRAPHENE • DETAILING </textPath></text></svg><b>4.8★</b></div>
-  <div class="hero-in">
-    <div class="hero-tag"><span class="eyebrow">Surat · Est. Detailing Studio</span></div>
-    <h1 class="display" aria-label="Karma"><span class="ch">K</span><span class="ch">A</span><span class="ch o">R</span><span class="ch">M</span><span class="ch">A</span></h1>
-    <div class="hero-row">
-      <div class="hero-tag"><p>What goes around, shines back. Ceramic coating, PPF and paint correction for people who notice every swirl mark.</p></div>
-      <div class="hero-tag" style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="book.html"><span>Book a slot</span></a><a class="btn ghost" href="services.html"><span>See pricing</span></a></div>
-    </div>
-    <div class="meta hero-tag" style="margin-top:26px"><span><b>4.8★</b> Google rating</span><span><b>9H</b> ceramic</span><span><b>10-yr</b> PPF warranty</span><span><b>Pick-up</b> across Surat</span></div>
+  <h1 class="display"><span class="ln"><span>Wipe the dirt.</span></span><span class="ln"><span>Keep the <em>karma.</em></span></span></h1>
+  <div class="stage" id="stage">
+    <img src="img/muscle.jpg" alt="Freshly detailed black Mustang">
+    <canvas id="dirt"></canvas>
+    <div class="hint">✋ Drag across the car to polish it</div>
+    <div class="done"><b>Good karma ✳</b></div>
+    <div class="hud"><div class="meter">Surface restored<i><b id="bar"></b></i></div><div class="pct"><span id="pct">0</span>%</div></div>
   </div>
-  <div class="scrollcue"></div>
+  <div class="hero-bot">
+    <p>Surat's obsessive detailing studio. Ceramic, graphene, PPF and paint correction — for people who notice every swirl mark.</p>
+    <div class="meta"><span><b>4.8★</b> Google</span><span><b>9H</b> Ceramic</span><span><b>10-yr</b> PPF</span><span><b>Free</b> pick-up</span></div>
+    <div style="display:flex;gap:10px"><a class="btn" href="book.html"><span>Book a slot →</span></a><a class="btn ghost" href="services.html"><span>Prices</span></a></div>
+  </div>
 </section>
 
 <div class="marq" aria-hidden="true"><div><span>Ceramic coating</span><span>Paint protection film</span><span>Paint correction</span><span>Graphene</span><span>Interior detail</span><span>Ceramic coating</span><span>Paint protection film</span><span>Paint correction</span><span>Graphene</span><span>Interior detail</span></div></div>
 
 <section class="sec mani">
-  <p class="eyebrow" style="margin-bottom:30px">The Karma method</p>
-  <p id="mani">Every car that leaves our bay is treated like it's the only one we'll ever touch. We measure paint depth, correct by hand, coat in controlled light — and only hand over the keys when it's better than the day it left the showroom.</p>
+  <p class="eyebrow" style="margin-bottom:26px">Job card Nº 001 — the Karma method</p>
+  <p id="mani">Every car that rolls into our bay is treated like the only one we'll ever touch. We measure paint depth, correct by hand, coat under studio light — and only hand back the keys when it's better than showroom day.</p>
 </section>
 
-<section class="hs" id="hs">
-  <div class="hs-head"><h2 class="display h2 split">Signature services</h2><a class="btn ghost" href="services.html"><span>All services & prices</span></a></div>
-  <div class="hs-track" id="track"></div>
+<section class="sec" style="padding-top:0">
+  <p class="eyebrow">Build your detail — tap the car</p>
+  <h2 class="display h2 split">Car anatomy</h2>
+  <div class="anat">
+    <div class="car" id="car">
+      <svg viewBox="0 0 600 250" aria-hidden="true">
+        <path class="zone" data-z="body" d="M40 175V152q2-24 30-30l100-10q35-32 80-46l110-4q40 2 80 38l80 12q40 6 45 28v35H500a40 40 0 0 0-80 0H180a40 40 0 0 0-80 0z"/>
+        <path class="zone" data-z="glass" d="M200 108q28-26 55-32l85-2q30 2 60 30z"/>
+        <circle class="zone" data-z="wheel" cx="140" cy="178" r="34"/><circle class="zone" data-z="wheel" cx="460" cy="178" r="34"/>
+        <rect class="zone" data-z="under" x="180" y="196" width="240" height="10" rx="3"/>
+        <ellipse class="zone" data-z="lamp" cx="552" cy="134" rx="12" ry="7"/>
+        <path class="ln" id="outline" d="M40 175V152q2-24 30-30l100-10q35-32 80-46l110-4q40 2 80 38l80 12q40 6 45 28v35H500a40 40 0 0 0-80 0H180a40 40 0 0 0-80 0z M200 108q28-26 55-32l85-2q30 2 60 30z M300 75v33 M140 178m-34 0a34 34 0 1 0 68 0a34 34 0 1 0-68 0 M460 178m-34 0a34 34 0 1 0 68 0a34 34 0 1 0-68 0 M140 178m-12 0a12 12 0 1 0 24 0a12 12 0 1 0-24 0 M460 178m-12 0a12 12 0 1 0 24 0a12 12 0 1 0-24 0 M540 134a12 7 0 1 0 24 0a12 7 0 1 0-24 0 M20 214H580"/>
+      </svg>
+    </div>
+    <div class="ticket">
+      <span class="eyebrow">Live estimate</span><h4>Your job card</h4>
+      <div class="sizes" id="asz"></div>
+      <div id="arows"><p class="row" style="color:var(--mute)">Tap a numbered dot on the car →</p></div>
+      <div class="tot" id="atot">₹0</div>
+      <a class="btn" id="ago" href="book.html"><span>Book this job →</span></a>
+    </div>
+  </div>
 </section>
 
-<section class="sec">
-  <p class="eyebrow">Drag to compare</p>
-  <h2 class="display h2 split">Before. After.</h2>
-  <div class="ba"><img src="img/s-polish.jpg" alt="After detailing"><img class="before" src="img/s-polish.jpg" alt="Before detailing"><span class="lb" style="left:18px">Before</span><span class="lb" style="right:18px">After</span><div class="handle"></div></div>
+<section class="hs">
+  <div class="hs-head"><h2 class="display h2 split">Service index</h2><a class="btn ghost" href="services.html"><span>Full price list</span></a></div>
+  <div class="hs-track" id="track"></div><img class="peek" id="peek" alt="">
+</section>
+
+<section class="sec" style="padding-top:0">
+  <p class="eyebrow">Drag the line</p>
+  <h2 class="display h2 split">Before / after</h2>
+  <div class="ba"><img src="img/s-polish.jpg" alt="After detailing"><img class="before" src="img/s-polish.jpg" alt="Before detailing"><span class="lb" style="left:14px">Before</span><span class="lb" style="right:14px">After</span><div class="handle"></div></div>
 </section>
 
 <section class="wrap"><div class="stats">
   <div><b data-count="1200" data-suf="+">0</b><span>Cars detailed</span></div>
-  <div><b data-count="48" data-suf="">0</b><span>Hours of curing, every coat</span></div>
-  <div><b data-count="10" data-suf=" yr">0</b><span>Max warranty</span></div>
+  <div><b data-count="48" data-suf="h">0</b><span>Cure time per coat</span></div>
+  <div><b data-count="10" data-suf="yr">0</b><span>Max warranty</span></div>
   <div><b data-count="100" data-suf="%">0</b><span>Hand-finished</span></div>
 </div></section>
 
 <section class="sec">
-  <p class="eyebrow">How it works</p><h2 class="display h2 split">Four steps to flawless</h2>
+  <p class="eyebrow">Process</p><h2 class="display h2 split">Four passes</h2>
   <div class="steps">
-    <div class="step"><b>01</b><h4>Inspect</h4><p>Paint-depth gauge and LED swirl audit. You see every defect before we quote.</p></div>
+    <div class="step"><b>01</b><h4>Inspect</h4><p>Paint-depth gauge + LED swirl audit. You see every defect before we quote.</p></div>
     <div class="step"><b>02</b><h4>Decontaminate</h4><p>Snow foam, iron fallout remover and clay bar strip what washing can't.</p></div>
-    <div class="step"><b>03</b><h4>Correct</h4><p>Multi-stage machine polishing under studio lighting until the clear coat is a mirror.</p></div>
-    <div class="step"><b>04</b><h4>Protect</h4><p>Ceramic, graphene or PPF — cured, inspected, handed over with warranty card.</p></div>
+    <div class="step"><b>03</b><h4>Correct</h4><p>Multi-stage machine polishing until the clear coat is a mirror.</p></div>
+    <div class="step"><b>04</b><h4>Protect</h4><p>Ceramic, graphene or PPF — cured, inspected, handed over with a warranty card.</p></div>
   </div>
 </section>
 
 <section class="sec" style="padding-top:0">
   <p class="eyebrow">Word of mouth</p><h2 class="display h2 split">Good karma</h2>
   <div class="revs">
-    <div class="rev reveal"><div class="st">★★★★★</div><p>“My 4-year-old Creta looks better than delivery day. The ceramic beading is unreal.”</p><small>Sample review · Creta owner</small></div>
+    <div class="rev reveal"><div class="st">★★★★★</div><p>“My 4-year-old Creta looks better than delivery day. The beading is unreal.”</p><small>Sample review · Creta owner</small></div>
     <div class="rev reveal"><div class="st">★★★★★</div><p>“They showed me the paint-depth readings before touching the car. That's when I knew.”</p><small>Sample review · BMW 3 Series</small></div>
     <div class="rev reveal"><div class="st">★★★★★</div><p>“Picked up from Vesu, dropped back spotless. Zero follow-up needed.”</p><small>Sample review · Fortuner owner</small></div>
   </div>
 </section>
 
-<section class="sec cta"><p class="eyebrow">Your car deserves it</p><h2 class="display h2 split">Book good karma</h2><a class="btn" href="book.html"><span>Reserve your slot</span></a></section>
+<section class="sec cta"><p class="eyebrow">What goes around, shines back</p><h2 class="display h2 split">Book good karma</h2><a class="btn" href="book.html"><span>Reserve your slot →</span></a></section>
 </main>
 <script src="js/gsap.min.js"></script><script src="js/ScrollTrigger.min.js"></script><script src="js/lenis.min.js"></script><script src="js/app.js"></script>
 <script>
-// services track
-$("#track").innerHTML = SVC.slice(2, 9).map((s, i) => `<a class="card" href="services.html#${s.id}"><img src="img/${s.img}.jpg" alt="${s.name}" loading="lazy"><span class="n">0${i + 1}</span><div class="cap"><h3>${s.name}</h3><div class="p">from ${inr(s.p[0])} · ${s.time}</div></div></a>`).join("");
+// ---- service index with cursor-following photo peek
+$("#track").innerHTML = SVC.map((s, i) => `<a class="card" href="services.html#${s.id}" data-img="img/${s.img}.jpg"><span class="n">${String(i + 1).padStart(2, "0")}</span><h3>${s.name}</h3><span class="p">from ${inr(s.p[0])}<br>${s.time}</span></a>`).join("");
+const peek = $("#peek");
+$("#track").addEventListener("mousemove", e => { const c = e.target.closest(".card"); if (!c) return; if (peek.getAttribute("src") !== c.dataset.img) peek.src = c.dataset.img; peek.style.opacity = 1; gsap.to(peek, { x: e.clientX + 24, y: e.clientY - 105, rotate: (e.movementX || 0) * .4, duration: .5 }); });
+$("#track").addEventListener("mouseleave", () => peek.style.opacity = 0);
 
-// manifesto words light up on scroll
 gsap.to(splitWords($("#mani")), { opacity: 1, stagger: .05, ease: "none", scrollTrigger: { trigger: "#mani", start: "top 80%", end: "bottom 45%", scrub: true } });
-// process lines fill
 $$(".step").forEach(s => gsap.to(s, { "--p": "100%", ease: "none", scrollTrigger: { trigger: s, start: "top 85%", end: "top 55%", scrub: true } }));
-// horizontal pin on desktop
-ScrollTrigger.matchMedia({ "(min-width:801px)": () => {
-  const t = $("#track");
-  gsap.to(t, { x: () => -(t.scrollWidth - innerWidth + 72), ease: "none", scrollTrigger: { trigger: "#hs", pin: true, scrub: 1, end: () => "+=" + t.scrollWidth, invalidateOnRefresh: true } });
-}});
 
-// light-sweep canvas: a moving specular beam + cursor-reactive spark field (deterministic seeds)
-const cv = $("#sweep"), cx = cv.getContext("2d");
-let W, H, mx = .65, my = .4; const P = [];
-for (let i = 0; i < 90; i++) P.push({ x: (i * 97 % 100) / 100, y: (i * 61 % 100) / 100, s: .3 + (i * 37 % 10) / 10, v: .0004 + (i % 7) * .00012 });
-const size = () => { W = cv.width = cv.offsetWidth * devicePixelRatio; H = cv.height = cv.offsetHeight * devicePixelRatio; };
-size(); addEventListener("resize", size);
-addEventListener("pointermove", e => { mx = e.clientX / innerWidth; my = e.clientY / innerHeight; });
-let tt = 0, heroOn = true;
-ScrollTrigger.create({ trigger: ".hero", start: "top top", end: "bottom top", onToggle: s => heroOn = s.isActive });
-(function draw() {
-  requestAnimationFrame(draw); if (!heroOn) return; tt += 1;
-  cx.clearRect(0, 0, W, H);
-  const bx = ((tt * .0025) % 1.6 - .3) * W; // beam sweeps across like a studio light bar
-  const g = cx.createLinearGradient(bx - W * .15, 0, bx + W * .15, H * .3);
-  g.addColorStop(0, "#0000"); g.addColorStop(.5, "#ffd99a30"); g.addColorStop(1, "#0000");
-  cx.fillStyle = g; cx.save(); cx.translate(bx, 0); cx.transform(1, 0, -.35, 1, 0, 0); cx.fillRect(-W * .12, 0, W * .24, H); cx.restore();
-  const r = cx.createRadialGradient(mx * W, my * H, 0, mx * W, my * H, W * .25);
-  r.addColorStop(0, "#e0a84c33"); r.addColorStop(1, "#0000"); cx.fillStyle = r; cx.fillRect(0, 0, W, H);
-  P.forEach(p => {
-    p.y -= p.v; if (p.y < 0) p.y = 1;
-    const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy), push = d < .15 ? (.15 - d) * .02 : 0;
-    p.x += dx / (d || 1) * push; if (p.x < 0 || p.x > 1) p.x = (p.x + 1) % 1;
-    cx.fillStyle = `rgba(255,214,150,${.25 + .5 * Math.abs(Math.sin(tt * .02 + p.s * 9))})`;
-    cx.beginPath(); cx.arc(p.x * W, p.y * H, p.s * 1.6 * devicePixelRatio, 0, 7); cx.fill();
-  });
-})();
+// ---- car anatomy configurator
+const SPOTS = [
+  { id: "ceramic", z: "body", x: 30, y: 58 }, { id: "ppf", z: "body", x: 80, y: 52 }, { id: "interior", z: "glass", x: 50, y: 37 },
+  { id: "foam", z: "wheel", x: 23.3, y: 71 }, { id: "rust", z: "under", x: 50, y: 88 }, { id: "headlight", z: "lamp", x: 92, y: 53 },
+];
+const picks = new Set(); let asz = 1;
+const car = $("#car");
+car.insertAdjacentHTML("beforeend", SPOTS.map((s, i) => `<button class="hot-dot" style="left:${s.x}%;top:${s.y}%" data-i="${i}" aria-label="${SVC.find(v => v.id === s.id).name}">${i + 1}</button>`).join(""));
+$("#asz").innerHTML = SIZES.map((s, i) => `<button data-i="${i}">${s}</button>`).join("");
+function drawAnat() {
+  $$("#asz button").forEach(b => b.classList.toggle("on", +b.dataset.i === asz));
+  $$(".hot-dot").forEach(b => b.classList.toggle("on", picks.has(SPOTS[b.dataset.i].id)));
+  const zs = new Set(SPOTS.filter(s => picks.has(s.id)).map(s => s.z));
+  $$("#car .zone").forEach(z => z.classList.toggle("on", zs.has(z.dataset.z)));
+  const L = SVC.filter(s => picks.has(s.id)), t = L.reduce((a, s) => a + s.p[asz], 0);
+  $("#arows").innerHTML = L.length ? L.map(s => `<div class="row"><span>${s.name}</span><span>${inr(s.p[asz])}</span></div>`).join("") : `<p class="row" style="color:var(--mute)">Tap a numbered dot on the car →</p>`;
+  const o = { v: +$("#atot").dataset.v || 0 }; $("#atot").dataset.v = t;
+  gsap.to(o, { v: t, duration: .6, onUpdate: () => $("#atot").textContent = inr(Math.round(o.v)) });
+  $("#ago").href = `book.html?z=${asz}${L.length ? "&s=" + L.map(s => s.id).join(",") : ""}`;
+}
+car.onclick = e => { const b = e.target.closest(".hot-dot"); if (!b) return; const id = SPOTS[b.dataset.i].id; picks.has(id) ? picks.delete(id) : picks.add(id); drawAnat(); };
+$("#asz").onclick = e => { if (e.target.dataset.i) { asz = +e.target.dataset.i; drawAnat(); } };
+drawAnat();
+const ol = $("#outline"), len = ol.getTotalLength();
+gsap.fromTo(ol, { strokeDasharray: len, strokeDashoffset: len }, { strokeDashoffset: 0, ease: "none", scrollTrigger: { trigger: car, start: "top 85%", end: "center 50%", scrub: 1 } });
+gsap.from(".hot-dot", { scale: 0, stagger: .08, ease: "back.out(2)", scrollTrigger: { trigger: car, start: "center 60%" } });
 
-// preloader → hero intro
-const c = { v: 0 }, intro = gsap.timeline({ paused: true });
-intro.to(".loader", { yPercent: -100, duration: 1, ease: "expo.inOut" })
-  .to(".hero-media img", { scale: 1.05, duration: 2.2, ease: "expo.out" }, "<.2")
-  .from(".hero h1 .ch", { yPercent: 110, duration: 1.3, stagger: .08, ease: "expo.out" }, "<.3")
-  .from(".hero-tag>*", { yPercent: 120, opacity: 0, duration: 1, stagger: .1, ease: "expo.out" }, "<.4")
-  .from(".badge", { scale: 0, rotate: -180, duration: 1.2, ease: "back.out(1.6)" }, "<.2");
+// ---- HERO: polish the dirty car (canvas scratch-off, deterministic grime)
+const st = $("#stage"), cv = $("#dirt"), ctx = cv.getContext("2d");
+let W, H, done = false, strokes = 0;
+function grime() {
+  const r = st.getBoundingClientRect(); W = cv.width = r.width; H = cv.height = r.height;
+  ctx.globalCompositeOperation = "source-over";
+  ctx.fillStyle = "#6b5a44"; ctx.globalAlpha = .9; ctx.fillRect(0, 0, W, H);
+  for (let i = 0; i < 260; i++) { // dust blotches + water spots, seeded by index
+    const x = (Math.sin(i * 12.9898) * 43758.5453 % 1 + 1) % 1 * W, y = (Math.sin(i * 78.233) * 12345.678 % 1 + 1) % 1 * H, s = 4 + i % 23;
+    ctx.globalAlpha = .12 + (i % 5) * .05; ctx.fillStyle = i % 3 ? "#4a3d2e" : "#a8957a";
+    ctx.beginPath(); ctx.arc(x, y, s, 0, 7); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+}
+grime(); addEventListener("resize", () => { if (!done) grime(); });
+let last = null;
+function scrub(x, y) {
+  ctx.globalCompositeOperation = "destination-out";
+  const steps = last ? Math.max(1, Math.ceil(Math.hypot(x - last[0], y - last[1]) / 14)) : 1;
+  for (let i = 1; i <= steps; i++) {
+    const px = last ? last[0] + (x - last[0]) * i / steps : x, py = last ? last[1] + (y - last[1]) * i / steps : y;
+    const g = ctx.createRadialGradient(px, py, 0, px, py, 70); g.addColorStop(0, "#000"); g.addColorStop(.55, "#000a"); g.addColorStop(1, "#0000");
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(px, py, 70, 0, 7); ctx.fill();
+  }
+  last = [x, y];
+  if (++strokes % 6 === 0) measure();
+}
+function measure() {
+  const d = ctx.getImageData(0, 0, W, H).data; let clear = 0, n = 0;
+  for (let i = 3; i < d.length; i += 4 * 97) { n++; if (d[i] < 60) clear++; }
+  const p = Math.round(clear / n * 100); $("#pct").textContent = p; $("#bar").style.width = p + "%";
+  if (p >= 55 && !done) finish();
+}
+function finish() {
+  done = true; $("#pct").textContent = 100; $("#bar").style.width = "100%";
+  gsap.timeline().to(cv, { opacity: 0, duration: .8 })
+    .fromTo(".stage img", { filter: "brightness(1.6) saturate(1.3)" }, { filter: "brightness(1) saturate(1)", duration: 1.2 }, "<")
+    .to(".stage .done", { opacity: 1, duration: .4 }, "<.2").from(".stage .done b", { scale: 1.4, duration: .9, ease: "expo.out" }, "<")
+    .to(".stage .done", { opacity: 0, duration: .6 }, "+=1.4");
+}
+const pos = e => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+st.addEventListener("pointermove", e => { if (done) return; $(".stage .hint").style.display = "none"; if (e.pointerType === "mouse" || e.buttons) scrub(...pos(e)); });
+st.addEventListener("pointerleave", () => last = null);
+st.addEventListener("pointerdown", e => { last = null; if (!done) scrub(...pos(e)); });
+st.addEventListener("pointerup", () => last = null);
+st.addEventListener("mouseenter", () => $(".cursor").classList.add("pad")); st.addEventListener("mouseleave", () => $(".cursor").classList.remove("pad"));
+function demoWipe() { // shows the trick: one automatic polishing pass across the bonnet
+  const p = { t: 0 }; last = null;
+  gsap.to(p, { t: 1, duration: 1.6, ease: "power2.inOut", onUpdate: () => scrub(W * (.12 + .5 * p.t), H * (.55 + .18 * Math.sin(p.t * 9))), onComplete: () => { last = null; measure(); } });
+}
+
+// ---- intro: shutter loader → headline → demo wipe
+const intro = gsap.timeline({ paused: true });
+intro.to(".loader i", { yPercent: -100, duration: .9, stagger: .06, ease: "expo.inOut" })
+  .to(".loader .count", { yPercent: -120, opacity: 0, duration: .5 }, 0)
+  .set(".loader", { display: "none" })
+  .from(".hero h1 .ln>span", { yPercent: 110, duration: 1.1, stagger: .12, ease: "expo.out" }, .4)
+  .from(".stage", { clipPath: "inset(50% 0 50% 0)", duration: 1.2, ease: "expo.inOut" }, .5)
+  .from(".stage img", { scale: 1.3, duration: 1.8, ease: "expo.out" }, .6)
+  .from(".hero-bot>*", { y: 30, opacity: 0, stagger: .08, duration: .8, ease: "expo.out" }, 1)
+  .add(demoWipe, 1.5);
 let seen; try { seen = sessionStorage.k } catch {}
 if (reduce || seen) { gsap.set(".loader", { display: "none" }); intro.progress(1); }
-else gsap.to(c, { v: 100, duration: 1.6, ease: "power2.inOut", onUpdate: () => { $(".count").textContent = Math.round(c.v); $(".bar").style.width = c.v + "%"; }, onComplete: () => { try { sessionStorage.k = 1 } catch {} intro.play(); } });
-// scroll: hero parallax + title split apart
-gsap.to(".hero-media img", { yPercent: 18, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
-gsap.to(".hero h1 .ch", { y: i => -innerHeight * (.04 + i * .03), ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+else { const c = { v: 0 }; gsap.to(c, { v: 100, duration: 1.3, ease: "power2.inOut", onUpdate: () => $(".count").textContent = String(Math.round(c.v)).padStart(2, "0"), onComplete: () => { try { sessionStorage.k = 1 } catch {} intro.play(); } }); }
 </script>
 </body></html>

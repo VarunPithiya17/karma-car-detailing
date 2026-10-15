@@ -29,7 +29,7 @@
 <script>
 const qs = new URLSearchParams(location.search), PKG = { Refresh: ["foam", "interior", "headlight"], Showroom: ["polish", "ceramic", "interior"], Armour: ["correct", "ppf", "rust"] };
 let step = 0, size = qs.has("z") ? +qs.get("z") : null;
-const picked = new Set(qs.get("s") ? [qs.get("s")] : PKG[qs.get("p")] || []);
+const picked = new Set(qs.get("s") ? qs.get("s").split(",") : PKG[qs.get("p")] || []);
 const f = $("#bk"), d = f.date;
 d.min = new Date(Date.now() + 864e5).toISOString().slice(0, 10); // booking page, not composition: real dates are fine here
 $("#sz").innerHTML = SIZES.map((s, i) => `<button type="button" class="opt" data-i="${i}"><b>${s}</b><small>${["i20, Swift, Polo", "City, Verna, Ciaz", "Creta, XUV700, Fortuner", "BMW, Merc, Audi"][i]}</small></button>`).join("");
